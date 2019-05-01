@@ -10,7 +10,7 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
     mongoose.connect(MONGODB_URI, {useNewUrlParser: true});
 
     mongoose.connection.on('error', (err) => {
-        console.log(`ERROR→ ${err.message}`);
+        context.log(`ERROR→ ${err.message}`);
     });
 
     switch(req.method){
@@ -24,10 +24,7 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
             break;
         // This will return a 404 for all methods other than get and patch that have been allowed in function.json file under bindings[0].methods
         default:
-            context.res = {
-                status: 404,
-                body: `The route does not exist`
-            };
+            sendErrorResponse(404, new Error(`The route method is not applicable for this resource`), context);
     }
 };
 
