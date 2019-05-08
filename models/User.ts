@@ -5,8 +5,8 @@ mongoose.Promise = global.Promise;
 const userSchema = new mongoose.Schema({
     name: {
         title: String,
-        first: String,
-        last: String
+        first: {type:String, index: true},
+        last: {type:String, index: true}
     },
     picture: {
         large: String,
@@ -16,6 +16,9 @@ const userSchema = new mongoose.Schema({
 
     assigned: {type: Boolean, default: false}
 });
+
+// Add text index to first name and last name with equal weightage
+userSchema.index({ "name.first" : 'text', "name.last" : 'text' });
 
 
 // Export the user model
