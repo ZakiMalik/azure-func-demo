@@ -1,5 +1,6 @@
 import { AzureFunction, Context, HttpRequest } from "@azure/functions"
 import * as mongoose from 'mongoose';
+import * as _ from 'lodash';
 
 const httpTrigger: AzureFunction = async function (context: Context, req: HttpRequest): Promise<void> {
     context.log('HTTP trigger function processed a request.');
@@ -37,16 +38,47 @@ const getAllUsers = async function (context: Context, req: HttpRequest): Promise
     try{
         context.log(`inside getAllUsers fn`);
         const User = require('./../models/User.js');
-        const {size=null, page=null} = req.query;
+        const {size=null, page=null, name=null, assigned=false} = req.query;
         let pageSize = (size && parseInt(size)) ? parseInt(size) : 15, 
             pageNum = (page && parseInt(page)) ? parseInt(page) : 1,
             skipVal = pageSize * (pageNum - 1);
-        context.log(`pageSize: ${pageSize}, pageNum: ${pageNum}, skipVal: ${skipVal}`);
+        let isAssigned = (assigned && ( Number(assigned) > 0 || assigned.toLowerCase().trim() === "true")) ? true : false;    
+        context.log(`pageSize: ${pageSize}, pageNum: ${pageNum}, skipVal: ${skipVal}, isAssigned: ${isAssigned}`);
 
-        
-        const allowedFilterFields = [];
-        let query = {};
-        const promiseArr = [User.count(query), User.find(query).skip(skipVal).limit(pageSize)];
+        let queryObj = {};
+        if(name){
+            let nameRegex = new RegExp(`^${name}`, "i");
+                
+            context.log(`nameRegex: ${nameRegex}`);
+            queryObj = { 
+                $or:[
+                    {
+                        $text: {
+                            $search: name
+                        } 
+                    }, 
+                    {
+                        "name.first":{
+                            $regex: nameRegex,
+                            $options: "i"
+                        }
+                    },
+                    {
+                        "name.last":{
+                            $regex: nameRegex,
+                            $options: "i"
+                        }
+                    }
+                ]
+                
+            };
+        }
+
+        if(isAssigned){
+            queryObj["assigned"] = true;
+        }
+        context.log(`queryObj: ${JSON.stringify(queryObj)}`);
+        const promiseArr = [User.countDocuments(queryObj), User.find(queryObj).skip(skipVal).limit(pageSize)];
         const resultArr =  await Promise.all(promiseArr);
         const [total, results] = resultArr;
         const meta = {
