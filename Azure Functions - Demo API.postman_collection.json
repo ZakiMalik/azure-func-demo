@@ -1,0 +1,874 @@
+{
+	"info": {
+		"_postman_id": "403f24c2-75a5-4fb2-957c-ebae68a6cec5",
+		"name": "Azure Functions - Demo API",
+		"description": "This postman collection points to a demo API using azure functions to:\n1. Get a paginated List of Users with searching capability\n2. Update a user\n3. Bulk update a user property",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "List, Search & Paginate Users",
+			"item": [
+				{
+					"name": "List Unassigned Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:7071/api/users?page=1&size=15",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7071",
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "15"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200: List of  Unassigned Users",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:7071/api/users?page=1&size=15",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7071",
+									"path": [
+										"api",
+										"users"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "15"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 08 May 2019 14:49:54 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Content-Length",
+									"value": "6703"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"page\": 1,\n        \"size\": 15,\n        \"total\": 4998\n    },\n    \"results\": [\n        {\n            \"name\": {\n                \"title\": \"mr\",\n                \"first\": \"eetu\",\n                \"last\": \"anttila\"\n            },\n            \"picture\": {\n                \"large\": \"https://randomuser.me/api/portraits/men/70.jpg\",\n                \"medium\": \"https://randomuser.me/api/portraits/med/men/70.jpg\",\n                \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/men/70.jpg\"\n            },\n            \"assigned\": false,\n            \"_id\": \"5cc9ae2f442404470ecc2433\",\n            \"__v\": 0\n        },\n        {\n            \"name\": {\n                \"title\": \"mr\",\n                \"first\": \"eetu\",\n                \"last\": \"anttila\"\n            },\n            \"picture\": {\n                \"large\": \"https://randomuser.me/api/portraits/men/70.jpg\",\n                \"medium\": \"https://randomuser.me/api/portraits/med/men/70.jpg\",\n                \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/men/70.jpg\"\n            },\n            \"assigned\": false,\n            \"_id\": \"5cc9ce0299c9d65c109a6d8d\",\n            \"__v\": 0\n        },\n        {\n            \"name\": {\n                \"title\": \"miss\",\n                \"first\": \"lilli\",\n                \"last\": \"erdmann\"\n            },\n            \"picture\": {\n                \"large\": \"https://randomuser.me/api/portraits/women/32.jpg\",\n                \"medium\": \"https://randomuser.me/api/portraits/med/women/32.jpg\",\n                \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/women/32.jpg\"\n            },\n            \"assigned\": false,\n            \"_id\": \"5cc9ce0299c9d65c109a6d8e\",\n            \"__v\": 0\n        },\n        {\n            \"name\": {\n                \"title\": \"monsieur\",\n                \"first\": \"enzo\",\n                \"last\": \"pierre\"\n            },\n            \"picture\": {\n                \"large\": \"https://randomuser.me/api/portraits/men/99.jpg\",\n                \"medium\": \"https://randomuser.me/api/portraits/med/men/99.jpg\",\n                \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/men/99.jpg\"\n            },\n            \"assigned\": false,\n            \"_id\": \"5cc9ce0299c9d65c109a6d8f\",\n            \"__v\": 0\n        },\n        {\n            \"name\": {\n                \"title\": \"mrs\",\n                \"first\": \"alexandra\",\n                \"last\": \"warren\"\n            },\n            \"picture\": {\n                \"large\": \"https://randomuser.me/api/portraits/women/39.jpg\",\n                \"medium\": \"https://randomuser.me/api/portraits/med/women/39.jpg\",\n                \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/women/39.jpg\"\n            },\n            \"assigned\": false,\n            \"_id\": \"5cc9ce0299c9d65c109a6d90\",\n            \"__v\": 0\n        },\n        {\n            \"name\": {\n                \"title\": \"mr\",\n                \"first\": \"edgar\",\n                \"last\": \"matthews\"\n            },\n            \"picture\": {\n                \"large\": \"https://randomuser.me/api/portraits/men/36.jpg\",\n                \"medium\": \"https://randomuser.me/api/portraits/med/men/36.jpg\",\n                \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/men/36.jpg\"\n            },\n            \"assigned\": false,\n            \"_id\": \"5cc9ce0299c9d65c109a6d91\",\n            \"__v\": 0\n        },\n        {\n            \"name\": {\n                \"title\": \"mr\",\n                \"first\": \"villads\",\n                \"last\": \"rasmussen\"\n            },\n            \"picture\": {\n                \"large\": \"https://randomuser.me/api/portraits/men/39.jpg\",\n                \"medium\": \"https://randomuser.me/api/portraits/med/men/39.jpg\",\n                \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/men/39.jpg\"\n            },\n            \"assigned\": false,\n            \"_id\": \"5cc9ce0299c9d65c109a6d92\",\n            \"__v\": 0\n        },\n        {\n            \"name\": {\n                \"title\": \"miss\",\n                \"first\": \"avery\",\n                \"last\": \"howell\"\n            },\n            \"picture\": {\n                \"large\": \"https://randomuser.me/api/portraits/women/9.jpg\",\n                \"medium\": \"https://randomuser.me/api/portraits/med/women/9.jpg\",\n                \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/women/9.jpg\"\n            },\n            \"assigned\": false,\n            \"_id\": \"5cc9ce0299c9d65c109a6d95\",\n            \"__v\": 0\n        },\n        {\n            \"name\": {\n                \"title\": \"miss\",\n                \"first\": \"lydia\",\n                \"last\": \"schindler\"\n            },\n            \"picture\": {\n                \"large\": \"https://randomuser.me/api/portraits/women/90.jpg\",\n                \"medium\": \"https://randomuser.me/api/portraits/med/women/90.jpg\",\n                \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/women/90.jpg\"\n            },\n            \"assigned\": false,\n            \"_id\": \"5cc9ce0299c9d65c109a6d93\",\n            \"__v\": 0\n        },\n        {\n            \"name\": {\n                \"title\": \"miss\",\n                \"first\": \"rosalyn\",\n                \"last\": \"jordan\"\n            },\n            \"picture\": {\n                \"large\": \"https://randomuser.me/api/portraits/women/15.jpg\",\n                \"medium\": \"https://randomuser.me/api/portraits/med/women/15.jpg\",\n                \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/women/15.jpg\"\n            },\n            \"assigned\": false,\n            \"_id\": \"5cc9ce0299c9d65c109a6d94\",\n            \"__v\": 0\n        },\n        {\n            \"name\": {\n                \"title\": \"mrs\",\n                \"first\": \"carol\",\n                \"last\": \"wade\"\n            },\n            \"picture\": {\n                \"large\": \"https://randomuser.me/api/portraits/women/27.jpg\",\n                \"medium\": \"https://randomuser.me/api/portraits/med/women/27.jpg\",\n                \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/women/27.jpg\"\n            },\n            \"assigned\": false,\n            \"_id\": \"5cc9ce0299c9d65c109a6d96\",\n            \"__v\": 0\n        },\n        {\n            \"name\": {\n                \"title\": \"mr\",\n                \"first\": \"marin\",\n                \"last\": \"garnier\"\n            },\n            \"picture\": {\n                \"large\": \"https://randomuser.me/api/portraits/men/20.jpg\",\n                \"medium\": \"https://randomuser.me/api/portraits/med/men/20.jpg\",\n                \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/men/20.jpg\"\n            },\n            \"assigned\": false,\n            \"_id\": \"5cc9ce0299c9d65c109a6d97\",\n            \"__v\": 0\n        },\n        {\n            \"name\": {\n                \"title\": \"mrs\",\n                \"first\": \"olive\",\n                \"last\": \"zhang\"\n            },\n            \"picture\": {\n                \"large\": \"https://randomuser.me/api/portraits/women/63.jpg\",\n                \"medium\": \"https://randomuser.me/api/portraits/med/women/63.jpg\",\n                \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/women/63.jpg\"\n            },\n            \"assigned\": false,\n            \"_id\": \"5cc9ce0299c9d65c109a6d98\",\n            \"__v\": 0\n        },\n        {\n            \"name\": {\n                \"title\": \"mr\",\n                \"first\": \"martin\",\n                \"last\": \"riedel\"\n            },\n            \"picture\": {\n                \"large\": \"https://randomuser.me/api/portraits/men/11.jpg\",\n                \"medium\": \"https://randomuser.me/api/portraits/med/men/11.jpg\",\n                \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/men/11.jpg\"\n            },\n            \"assigned\": false,\n            \"_id\": \"5cc9ce0299c9d65c109a6d99\",\n            \"__v\": 0\n        },\n        {\n            \"name\": {\n                \"title\": \"ms\",\n                \"first\": \"hailey\",\n                \"last\": \"ouellet\"\n            },\n            \"picture\": {\n                \"large\": \"https://randomuser.me/api/portraits/women/5.jpg\",\n                \"medium\": \"https://randomuser.me/api/portraits/med/women/5.jpg\",\n                \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/women/5.jpg\"\n            },\n            \"assigned\": false,\n            \"_id\": \"5cc9ce0299c9d65c109a6d9a\",\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Search Unassigned users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:7071/api/users?page=1&size=15&name=كاميا",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7071",
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "15"
+								},
+								{
+									"key": "name",
+									"value": "كاميا"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200: Search Unassigned Users",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:7071/api/users?page=1&size=15&name=كاميا",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7071",
+									"path": [
+										"api",
+										"users"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "15"
+										},
+										{
+											"key": "name",
+											"value": "كاميا"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 08 May 2019 14:50:37 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Content-Length",
+									"value": "5286"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"page\": 1,\n        \"size\": 15,\n        \"total\": 11\n    },\n    \"results\": [\n        {\n            \"name\": {\n                \"title\": \"miss\",\n                \"first\": \"تارا\",\n                \"last\": \"كامياران\"\n            },\n            \"picture\": {\n                \"large\": \"https://randomuser.me/api/portraits/women/77.jpg\",\n                \"medium\": \"https://randomuser.me/api/portraits/med/women/77.jpg\",\n                \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/women/77.jpg\"\n            },\n            \"assigned\": false,\n            \"_id\": \"5cc9ce0299c9d65c109a6eec\",\n            \"__v\": 0,\n            \"score\": 0\n        },\n        {\n            \"name\": {\n                \"title\": \"ms\",\n                \"first\": \"مریم\",\n                \"last\": \"كامياران\"\n            },\n            \"picture\": {\n                \"large\": \"https://randomuser.me/api/portraits/women/42.jpg\",\n                \"medium\": \"https://randomuser.me/api/portraits/med/women/42.jpg\",\n                \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/women/42.jpg\"\n            },\n            \"assigned\": false,\n            \"_id\": \"5cc9ce0299c9d65c109a71d1\",\n            \"__v\": 0,\n            \"score\": 0\n        },\n        {\n            \"name\": {\n                \"title\": \"mr\",\n                \"first\": \"پوریا\",\n                \"last\": \"كامياران\"\n            },\n            \"picture\": {\n                \"large\": \"https://randomuser.me/api/portraits/men/96.jpg\",\n                \"medium\": \"https://randomuser.me/api/portraits/med/men/96.jpg\",\n                \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/men/96.jpg\"\n            },\n            \"assigned\": false,\n            \"_id\": \"5cc9ce0299c9d65c109a72a9\",\n            \"__v\": 0,\n            \"score\": 0\n        },\n        {\n            \"name\": {\n                \"title\": \"ms\",\n                \"first\": \"ستایش\",\n                \"last\": \"كامياران\"\n            },\n            \"picture\": {\n                \"large\": \"https://randomuser.me/api/portraits/women/32.jpg\",\n                \"medium\": \"https://randomuser.me/api/portraits/med/women/32.jpg\",\n                \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/women/32.jpg\"\n            },\n            \"assigned\": false,\n            \"_id\": \"5cc9ce0299c9d65c109a724e\",\n            \"__v\": 0,\n            \"score\": 0\n        },\n        {\n            \"name\": {\n                \"title\": \"miss\",\n                \"first\": \"آدرینا\",\n                \"last\": \"كامياران\"\n            },\n            \"picture\": {\n                \"large\": \"https://randomuser.me/api/portraits/women/64.jpg\",\n                \"medium\": \"https://randomuser.me/api/portraits/med/women/64.jpg\",\n                \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/women/64.jpg\"\n            },\n            \"assigned\": false,\n            \"_id\": \"5cc9ce0299c9d65c109a73d0\",\n            \"__v\": 0,\n            \"score\": 0\n        },\n        {\n            \"name\": {\n                \"title\": \"mr\",\n                \"first\": \"كيان\",\n                \"last\": \"كامياران\"\n            },\n            \"picture\": {\n                \"large\": \"https://randomuser.me/api/portraits/men/20.jpg\",\n                \"medium\": \"https://randomuser.me/api/portraits/med/men/20.jpg\",\n                \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/men/20.jpg\"\n            },\n            \"assigned\": false,\n            \"_id\": \"5cc9ce0299c9d65c109a76a7\",\n            \"__v\": 0,\n            \"score\": 0\n        },\n        {\n            \"name\": {\n                \"title\": \"mrs\",\n                \"first\": \"آیناز\",\n                \"last\": \"كامياران\"\n            },\n            \"picture\": {\n                \"large\": \"https://randomuser.me/api/portraits/women/22.jpg\",\n                \"medium\": \"https://randomuser.me/api/portraits/med/women/22.jpg\",\n                \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/women/22.jpg\"\n            },\n            \"assigned\": false,\n            \"_id\": \"5cc9ce0399c9d65c109a7ae4\",\n            \"__v\": 0,\n            \"score\": 0\n        },\n        {\n            \"name\": {\n                \"title\": \"ms\",\n                \"first\": \"درسا\",\n                \"last\": \"كامياران\"\n            },\n            \"picture\": {\n                \"large\": \"https://randomuser.me/api/portraits/women/46.jpg\",\n                \"medium\": \"https://randomuser.me/api/portraits/med/women/46.jpg\",\n                \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/women/46.jpg\"\n            },\n            \"assigned\": false,\n            \"_id\": \"5cc9ce0399c9d65c109a7bee\",\n            \"__v\": 0,\n            \"score\": 0\n        },\n        {\n            \"name\": {\n                \"title\": \"mr\",\n                \"first\": \"آرتين\",\n                \"last\": \"كامياران\"\n            },\n            \"picture\": {\n                \"large\": \"https://randomuser.me/api/portraits/men/50.jpg\",\n                \"medium\": \"https://randomuser.me/api/portraits/med/men/50.jpg\",\n                \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/men/50.jpg\"\n            },\n            \"assigned\": false,\n            \"_id\": \"5cc9ce0399c9d65c109a8073\",\n            \"__v\": 0,\n            \"score\": 0\n        },\n        {\n            \"name\": {\n                \"title\": \"mr\",\n                \"first\": \"ایلیا\",\n                \"last\": \"كامياران\"\n            },\n            \"picture\": {\n                \"large\": \"https://randomuser.me/api/portraits/men/77.jpg\",\n                \"medium\": \"https://randomuser.me/api/portraits/med/men/77.jpg\",\n                \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/men/77.jpg\"\n            },\n            \"assigned\": false,\n            \"_id\": \"5cc9ce0399c9d65c109a7ec7\",\n            \"__v\": 0,\n            \"score\": 0\n        },\n        {\n            \"name\": {\n                \"title\": \"mrs\",\n                \"first\": \"سوگند\",\n                \"last\": \"كامياران\"\n            },\n            \"picture\": {\n                \"large\": \"https://randomuser.me/api/portraits/women/75.jpg\",\n                \"medium\": \"https://randomuser.me/api/portraits/med/women/75.jpg\",\n                \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/women/75.jpg\"\n            },\n            \"assigned\": false,\n            \"_id\": \"5cc9ce0399c9d65c109a80cc\",\n            \"__v\": 0,\n            \"score\": 0\n        }\n    ]\n}"
+						},
+						{
+							"name": "200: Search Unassigned users - No Matching Users",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:7071/api/users?page=1&size=15&name=abc123",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7071",
+									"path": [
+										"api",
+										"users"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "15"
+										},
+										{
+											"key": "name",
+											"value": "abc123"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 08 May 2019 14:53:47 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Content-Length",
+									"value": "82"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"page\": 1,\n        \"size\": 15,\n        \"total\": 0\n    },\n    \"results\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "List Assigned Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:7071/api/users?page=1&size=15&assigned=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7071",
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "15"
+								},
+								{
+									"key": "assigned",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200: List of Assigned Users",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:7071/api/users?page=1&size=15&assigned=true",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7071",
+									"path": [
+										"api",
+										"users"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "15"
+										},
+										{
+											"key": "assigned",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 08 May 2019 14:41:57 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1417"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"page\": 1,\n        \"size\": 15,\n        \"total\": 3\n    },\n    \"results\": [\n        {\n            \"name\": {\n                \"title\": \"mr\",\n                \"first\": \"perpétuo\",\n                \"last\": \"pinto\"\n            },\n            \"picture\": {\n                \"large\": \"https://randomuser.me/api/portraits/men/75.jpg\",\n                \"medium\": \"https://randomuser.me/api/portraits/med/men/75.jpg\",\n                \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/men/75.jpg\"\n            },\n            \"assigned\": true,\n            \"_id\": \"5cc9ce0299c9d65c109a6e09\",\n            \"__v\": 0\n        },\n        {\n            \"name\": {\n                \"title\": \"mademoiselle\",\n                \"first\": \"ana\",\n                \"last\": \"moulin\"\n            },\n            \"picture\": {\n                \"large\": \"https://randomuser.me/api/portraits/women/85.jpg\",\n                \"medium\": \"https://randomuser.me/api/portraits/med/women/85.jpg\",\n                \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/women/85.jpg\"\n            },\n            \"assigned\": true,\n            \"_id\": \"5cc9ce0299c9d65c109a6ed4\",\n            \"__v\": 0\n        },\n        {\n            \"name\": {\n                \"title\": \"mrs\",\n                \"first\": \"luisa\",\n                \"last\": \"zimmermann\"\n            },\n            \"picture\": {\n                \"large\": \"https://randomuser.me/api/portraits/women/63.jpg\",\n                \"medium\": \"https://randomuser.me/api/portraits/med/women/63.jpg\",\n                \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/women/63.jpg\"\n            },\n            \"assigned\": true,\n            \"_id\": \"5cc9ce0299c9d65c109a6ed9\",\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Search Assigned Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:7071/api/users?page=1&size=15&assigned=true&name=ana ",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7071",
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "15"
+								},
+								{
+									"key": "assigned",
+									"value": "true"
+								},
+								{
+									"key": "name",
+									"value": "ana "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200: Search Assigned Users",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:7071/api/users?page=1&size=15&assigned=true&name=ana ",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7071",
+									"path": [
+										"api",
+										"users"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "15"
+										},
+										{
+											"key": "assigned",
+											"value": "true"
+										},
+										{
+											"key": "name",
+											"value": "ana "
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 08 May 2019 14:49:05 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Content-Length",
+									"value": "553"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"page\": 1,\n        \"size\": 15,\n        \"total\": 1\n    },\n    \"results\": [\n        {\n            \"name\": {\n                \"title\": \"mademoiselle\",\n                \"first\": \"ana\",\n                \"last\": \"moulin\"\n            },\n            \"picture\": {\n                \"large\": \"https://randomuser.me/api/portraits/women/85.jpg\",\n                \"medium\": \"https://randomuser.me/api/portraits/med/women/85.jpg\",\n                \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/women/85.jpg\"\n            },\n            \"assigned\": true,\n            \"_id\": \"5cc9ce0299c9d65c109a6ed4\",\n            \"__v\": 0,\n            \"score\": 1.1\n        }\n    ]\n}"
+						},
+						{
+							"name": "200: Search Assigned Users - No matching Users",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:7071/api/users?page=1&size=15&assigned=true&name=abc123",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7071",
+									"path": [
+										"api",
+										"users"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "15"
+										},
+										{
+											"key": "assigned",
+											"value": "true"
+										},
+										{
+											"key": "name",
+											"value": "abc123"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 08 May 2019 14:52:42 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Content-Length",
+									"value": "82"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"page\": 1,\n        \"size\": 15,\n        \"total\": 0\n    },\n    \"results\": []\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Assign Users",
+			"item": [
+				{
+					"name": "Assign User By Id",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"assigned\": true\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7071/api/users/5cc9ce0299c9d65c109a6ed9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7071",
+							"path": [
+								"api",
+								"users",
+								"5cc9ce0299c9d65c109a6ed9"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "400: Assign User By Id - Invalid request body",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"assigned123\": true\n}"
+								},
+								"url": {
+									"raw": "http://localhost:7071/api/users/5cc9ce0299c9d65c109a6ed9",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7071",
+									"path": [
+										"api",
+										"users",
+										"5cc9ce0299c9d65c109a6ed9"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 08 May 2019 14:55:23 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Content-Length",
+									"value": "68"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Mandatory parameters missing or in invalid format\"\n}"
+						},
+						{
+							"name": "200: User Assigned Successfully",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"assigned\": true\n}"
+								},
+								"url": {
+									"raw": "http://localhost:7071/api/users/5cc9ce0299c9d65c109a6ed9",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7071",
+									"path": [
+										"api",
+										"users",
+										"5cc9ce0299c9d65c109a6ed9"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 08 May 2019 14:44:00 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Content-Length",
+									"value": "477"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"user has been updated successfully\",\n    \"user\": {\n        \"name\": {\n            \"title\": \"mrs\",\n            \"first\": \"luisa\",\n            \"last\": \"zimmermann\"\n        },\n        \"picture\": {\n            \"large\": \"https://randomuser.me/api/portraits/women/63.jpg\",\n            \"medium\": \"https://randomuser.me/api/portraits/med/women/63.jpg\",\n            \"thumbnail\": \"https://randomuser.me/api/portraits/thumb/women/63.jpg\"\n        },\n        \"assigned\": true,\n        \"_id\": \"5cc9ce0299c9d65c109a6ed9\",\n        \"__v\": 0\n    }\n}"
+						},
+						{
+							"name": "404: Invalid User Id",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"assigned\": true\n}"
+								},
+								"url": {
+									"raw": "http://localhost:7071/api/users/0ac9ce0299c9d65c109a6e09",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7071",
+									"path": [
+										"api",
+										"users",
+										"0ac9ce0299c9d65c109a6e09"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 08 May 2019 14:41:38 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"The specified user does not exist\"\n}"
+						},
+						{
+							"name": "400: Parameters in invalid format",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"assigned\": true\n}"
+								},
+								"url": {
+									"raw": "http://localhost:7071/api/users/512",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7071",
+									"path": [
+										"api",
+										"users",
+										"512"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 08 May 2019 14:46:23 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Content-Length",
+									"value": "65"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Mandatory parameters missing in invalid format\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Assign Users in Bulk",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"userIds\":[\"5cc9ae2f442404470ecc2433\",\"5cc9ce0299c9d65c109a6d8d\"],\n\t\"assigned\": true\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7071/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7071",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200: Successfully Assigned Users in Bulk",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"userIds\":[\"5cc9ae2f442404470ecc2433\",\"5cc9ce0299c9d65c109a6d8d\"],\n\t\"assigned\": true\n}"
+								},
+								"url": {
+									"raw": "http://localhost:7071/api/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7071",
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 08 May 2019 17:38:11 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Content-Length",
+									"value": "250"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"details\": {\n        \"success\": true,\n        \"receivedIdsLength\": 2,\n        \"validFilteredIdsLength\": 2,\n        \"usersUpdatedLength\": 2,\n        \"usersMatchedLength\": 2\n    },\n    \"message\": \"Operation successful,  2 User document(s) matched, 2 document(s) updated\"\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}

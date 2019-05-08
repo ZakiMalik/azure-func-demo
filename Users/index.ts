@@ -24,6 +24,9 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
         case "PATCH":
             await updateUserById(context, req);
             break;
+        case "PUT":
+            await updateUsersInBulk(context, req);
+            break;
         // This will return a 404 for all methods other than get and patch that have been allowed in function.json file under bindings[0].methods
         default:
             sendErrorResponse(404, new Error(`The route method is not applicable for this resource`), context);
@@ -121,18 +124,106 @@ const getAllUsers = async function (context: Context, req: HttpRequest): Promise
  * @param req 
  */
 const updateUserById = async function (context: Context, req: HttpRequest): Promise<void> {
-    context.log(`inside updateUserById fn`);
-    const userId = (req.params && req.params.id) ? req.params.id :  null;
-    
-    if (userId) {
-        sendResponse(200, {
-            message : `received userId: ${userId}`
-        }, context);
+    try{
+        context.log(`inside updateUserById fn`);
+        const userId = (req.params && req.params.id) ? req.params.id :  null;
+        const allowedFields = ["assigned"];
+        if (userId && req.body && mongoose.Types.ObjectId.isValid(userId)) {
+            let objToSet = {};
+            for( let key in req.body){
+                if(allowedFields.includes(key)){
+                    objToSet[key] = req.body[key];
+                }
+            }
+            if(Object.keys(objToSet).length){
+                let updatedUser = await User.findByIdAndUpdate(userId, {$set: objToSet}, {new: true});
+                if(updatedUser) {
+                  sendResponse(200, {
+                    message: `user has been updated successfully`,
+                    user: updatedUser
+                  }, context);
+                } else {
+                  sendResponse(404,{
+                      message: `The specified user does not exist`
+                  }, context);
+                }        
+            }else{
+                context.log(`body doesn't contain modifiable fields, nothing to update`);
+                sendResponse(400, {
+                    message : `Mandatory parameters missing or in invalid format`
+                }, context);
+            }
+        }
+        else {
+            context.log(`req.params is missing userId`);
+            sendResponse(400, {
+                message : `Mandatory parameters missing in invalid format`
+            }, context);
+        }
+    }catch(e){ 
+        sendErrorResponse(500, e, context);
     }
-    else {
-        sendResponse(400, {
-            message : `Please pass a userId, it is a mandatory parameter`
-        }, context);
+};
+
+/**
+ * 
+ * @param context 
+ * @param req 
+ */
+const updateUsersInBulk = async function (context: Context, req: HttpRequest): Promise<void> {
+    try{
+        context.log(`inside updateUsersInBulk fn`);
+        const userIds = (req.body && req.body.userIds) ? req.body.userIds :  [];
+        const validFilteredIds = userIds.filter((userId) => mongoose.Types.ObjectId.isValid(userId));
+        let meta = {
+            success: false,
+            receivedIdsLength: userIds.length,
+            validFilteredIdsLength: validFilteredIds.length,
+            usersUpdatedLength: 0,
+            usersMatchedLength: 0,
+        };
+
+        //Only allowed field to update currently is the assigned key
+        // NOTE: Do not add the _id and userIds field in allowedFields array
+        const allowedFields = ["assigned"];
+
+        if (validFilteredIds.length) {
+            let objToSet = {};
+                for( let key in req.body){
+                    if(allowedFields.includes(key)){
+                        objToSet[key] = req.body[key];
+                    }
+                }
+                if(Object.keys(objToSet).length){
+                    let updatedUsersMeta = await User.update({_id: validFilteredIds}, {$set: objToSet}, {new: true, multi: true});
+                    console.log(`updatedUsersMeta: ${JSON.stringify(updatedUsersMeta)}`);
+                    if(updatedUsersMeta) {
+                        const {ok:success=false, nModified:docsModifiedCount=0, n:docsMatched=0} = updatedUsersMeta;
+                        meta.success = (success) ? true : false;
+                        meta.usersMatchedLength = docsMatched;
+                        meta.usersUpdatedLength = docsModifiedCount;
+                        sendResponse(200, {
+                            details: meta,
+                            message: `Operation ${meta.success ? "successful" : "unsuccessful"},  ${meta.usersMatchedLength} User document(s) matched, ${meta.usersUpdatedLength} document(s) updated`
+                        }, context);
+                    } else {
+                    sendResponse(404,{
+                        message: `The specified user(s) do not exist and were not updated`
+                    }, context);
+                    }        
+                }else{
+                    context.log(`body doesn't contain modifiable fields, nothing to update`);
+                    sendResponse(400, {
+                        message : `Mandatory parameters missing or in invalid format`
+                    }, context);
+                }
+        }else {
+            sendResponse(400, {
+                message : `Please pass in valid userIds`
+            }, context);
+        }
+    }catch(e){ 
+        sendErrorResponse(500, e, context);
     }
 };
 
@@ -150,7 +241,7 @@ const sendResponse = async function (status: number, body: object, context: Cont
             'Content-Type': 'application/json'
         }
     };
-    context.log(`returning response from route invocation: ${JSON.stringify(response)}`);
+    // context.log(`returning response from route invocation: ${JSON.stringify(response)}`);
     context.res = response;
 };
 
