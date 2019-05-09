@@ -120,13 +120,17 @@ const getAllUsers = async function (context: Context, req: HttpRequest): Promise
 
 /**
  * For this function will only be demo-ing updating the assigned flag's value
+ * 
  * @param context 
- * @param req 
+ * @param req : req.params.id and req.body.assigned properties are required otherwise validation errors will be received
+ * 
+ * Updates a user's assigned flag to true/false , provided the a valid mongoose userId is provided
  */
 const updateUserById = async function (context: Context, req: HttpRequest): Promise<void> {
     try{
         context.log(`inside updateUserById fn`);
         const userId = (req.params && req.params.id) ? req.params.id :  null;
+        // NOTE: Do not add the _id field in allowedFields array
         const allowedFields = ["assigned"];
         if (userId && req.body && mongoose.Types.ObjectId.isValid(userId)) {
             let objToSet = {};
@@ -166,9 +170,10 @@ const updateUserById = async function (context: Context, req: HttpRequest): Prom
 };
 
 /**
- * 
+ * This function does a bulk update operation for given valid mongoose userIds, for purposes of this demo update
+ * only works on the assigned field setting/unsetting its Boolean value  
  * @param context 
- * @param req 
+ * @param req : req.body.userIds and req.body.assigned are mandatory params
  */
 const updateUsersInBulk = async function (context: Context, req: HttpRequest): Promise<void> {
     try{
@@ -228,7 +233,7 @@ const updateUsersInBulk = async function (context: Context, req: HttpRequest): P
 };
 
 /**
- * 
+ * Utility function to send route response in JSON
  * @param status 
  * @param body 
  * @param context 
@@ -245,6 +250,13 @@ const sendResponse = async function (status: number, body: object, context: Cont
     context.res = response;
 };
 
+/**
+ * Utility function to log error and send error response from the route invocation
+ * @uses sendResponse fn
+ * @param status 
+ * @param errorObj 
+ * @param context 
+ */
 const sendErrorResponse = async function (status: number, errorObj: Error, context: Context): Promise<void> {
     context.log(`exception occured: ${errorObj.message}`);
     status = (status) ? status : 500;
