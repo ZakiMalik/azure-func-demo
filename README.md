@@ -20,7 +20,7 @@ By default the server with start listening on port 7071
 
 **API Exposed**
 
-A postman collection is already included in the repository [here](../blob/master/Azure Functions - Demo API.postman_collection.json)
+A postman collection is already included in the repository [here](https://github.com/ZakiMalik/azure-func-demo/blob/master/Azure%20Functions%20-%20Demo%20API.postman_collection.json)
 You can import the postman collection, it already contains the different options available in the REST API along with saved examples containing request and responses
 
 | Method | URL        | Purpose                                                                                             | Query Parameters                                                                     | Body                                              |
