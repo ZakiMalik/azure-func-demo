@@ -9,8 +9,8 @@
     "start:host": "func start",
     "start": "npm run start:host & npm run watch",
     "build:production": "npm run prestart && npm prune --production",
-    "test": "jest --forceExit --coverage --verbose --detectOpenHandles",
-    "watch-test": "jest --forceExit --coverage --verbose --watch --detectOpenHandles"
+    "test": "jest --forceExit --coverage --verbose --detectOpenHandles --silent",
+    "dev-test": "jest --forceExit --coverage --verbose --detectOpenHandles --watchAll"
   },
   "dependencies": {
     "lodash": "^4.17.11",
