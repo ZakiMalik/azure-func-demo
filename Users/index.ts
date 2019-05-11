@@ -154,14 +154,14 @@ const updateUserById = async function (context: Context, req: HttpRequest): Prom
             }else{
                 context.log(`body doesn't contain modifiable fields, nothing to update`);
                 sendResponse(400, {
-                    message : `Mandatory parameters missing or in invalid format`
+                    message : `No Editable Fields Specified in Request`
                 }, context);
             }
         }
         else {
             context.log(`req.params is missing userId`);
             sendResponse(400, {
-                message : `Mandatory parameters missing in invalid format`
+                message : `Mandatory parameters missing or in invalid format`
             }, context);
         }
     }catch(e){ 
@@ -178,7 +178,7 @@ const updateUserById = async function (context: Context, req: HttpRequest): Prom
 const updateUsersInBulk = async function (context: Context, req: HttpRequest): Promise<void> {
     try{
         context.log(`inside updateUsersInBulk fn`);
-        const userIds = (req.body && req.body.userIds) ? req.body.userIds :  [];
+        const userIds = (req.body && req.body.userIds && Array.isArray(req.body.userIds)) ? req.body.userIds :  [];
         const validFilteredIds = userIds.filter((userId) => mongoose.Types.ObjectId.isValid(userId));
         let meta = {
             success: false,
@@ -207,19 +207,28 @@ const updateUsersInBulk = async function (context: Context, req: HttpRequest): P
                         meta.success = (success) ? true : false;
                         meta.usersMatchedLength = docsMatched;
                         meta.usersUpdatedLength = docsModifiedCount;
-                        sendResponse(200, {
-                            details: meta,
-                            message: `Operation ${meta.success ? "successful" : "unsuccessful"},  ${meta.usersMatchedLength} User document(s) matched, ${meta.usersUpdatedLength} document(s) updated`
-                        }, context);
+
+                        if(!docsMatched){
+                            sendResponse(404, {
+                                details: meta,
+                                message: `No document(s) matched the UserIds provided`
+                            }, context);
+                        }else{
+                            sendResponse(200, {
+                                details: meta,
+                                message: `Operation ${meta.success ? "successful" : "unsuccessful"},  ${meta.usersMatchedLength} User document(s) matched, ${meta.usersUpdatedLength} document(s) updated`
+                            }, context);
+                        }
+
                     } else {
-                    sendResponse(404,{
-                        message: `The specified user(s) do not exist and were not updated`
-                    }, context);
+                        sendResponse(404,{
+                            message: `The specified user(s) do not exist and were not updated`
+                        }, context);
                     }        
                 }else{
                     context.log(`body doesn't contain modifiable fields, nothing to update`);
                     sendResponse(400, {
-                        message : `Mandatory parameters missing or in invalid format`
+                        message : `No Editable Fields Specified in Request`
                     }, context);
                 }
         }else {
