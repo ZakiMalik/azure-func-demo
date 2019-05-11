@@ -2,7 +2,7 @@ import httpFunction from './index';
 import context = require('azure-function-context-mock');
 import { HttpRequest } from '@azure/functions';
 const User = require('../models/User');
-process.env.MONGODB_URI = require('./../local.settings.json').Values.MONGODB_URI;
+process.env = require('./../local.settings.json').Values;
 
 describe('User List => GET /users[?page=&size=&name=&assigned=]', () => {
     
